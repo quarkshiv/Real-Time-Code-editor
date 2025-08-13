@@ -6,20 +6,50 @@ import { Card } from '@/components/ui/card';
 import { ParticleBackground } from '@/components/Particles';
 import { Code2, Users, Zap, Github } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
+import { createClient } from '@supabase/supabase-js';
+import { v4 as uuidv4 } from 'uuid'; // ✅ Import UUID
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 const Index = () => {
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState('');
 
-  const createRoom = () => {
-    const newRoomId = Math.random().toString(36).substring(2, 8);
+  // Create room in Supabase DB
+  const createRoom = async () => {
+    const newRoomId = uuidv4(); // ✅ Proper UUID
+
+    const { error } = await supabase.from('rooms').insert([
+      { id: newRoomId, created_at: new Date().toISOString() }
+    ]);
+
+    if (error) {
+      console.error('Error creating room:', error.message);
+      return;
+    }
+
     navigate(`/editor/${newRoomId}`);
   };
 
-  const joinRoom = () => {
-    if (roomId.trim()) {
-      navigate(`/editor/${roomId.trim()}`);
+  // Check if room exists before joining
+  const joinRoom = async () => {
+    if (!roomId.trim()) return;
+
+    const { data, error } = await supabase
+      .from('rooms')
+      .select('id')
+      .eq('id', roomId.trim())
+      .single();
+
+    if (error || !data) {
+      alert('Room not found!');
+      return;
     }
+
+    navigate(`/editor/${roomId.trim()}`);
   };
 
   const features = [
@@ -44,32 +74,24 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-glow">
-        {/* Dark Gradient Background */}
         <div className="absolute inset-0 gradient-hero" />
-        
-        {/* Additional overlay for extra depth */}
         <div className="absolute inset-0 gradient-overlay" />
-        
-        {/* Particles */}
         <ParticleBackground />
-        
-        {/* Hero Image with darker overlay */}
         <div className="absolute inset-0 opacity-10">
-          <img 
-            src={heroImage} 
-            alt="Code collaboration" 
+          <img
+            src={heroImage}
+            alt="Code collaboration"
             className="w-full h-full object-cover"
           />
         </div>
-        
-        {/* Content */}
+
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className="mb-8">
             <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-4 py-2 text-white/95 text-sm font-medium mb-6 border border-white/10 shadow-glow">
               <Code2 className="w-4 h-4" />
               Collaborative Code Editor
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Code Together,
               <br />
@@ -77,35 +99,35 @@ const Index = () => {
                 Build Together
               </span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-white/95 mb-12 max-w-2xl mx-auto leading-relaxed">
               Real-time collaborative code editor for teams. Share rooms, edit code together, 
               and bring your ideas to life with seamless synchronization.
             </p>
           </div>
-          
+
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              variant="hero" 
-              size="lg" 
+            <Button
+              variant="hero"
+              size="lg"
               onClick={createRoom}
               className="text-lg px-8 py-4"
             >
               <Zap className="w-5 h-5" />
               Create Room
             </Button>
-            
+
             <div className="flex gap-2 items-center">
               <Input
                 placeholder="Enter room ID..."
                 value={roomId}
-                onChange={(e) => setRoomId(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && joinRoom()}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRoomId(e.target.value)}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && joinRoom()}
                 className="bg-white/5 backdrop-blur-md border-white/20 text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/10"
               />
-              <Button 
-                variant="hero-outline" 
+              <Button
+                variant="hero-outline"
                 size="lg"
                 onClick={joinRoom}
                 disabled={!roomId.trim()}
@@ -114,7 +136,7 @@ const Index = () => {
               </Button>
             </div>
           </div>
-          
+
           {/* Stats */}
           <div className="flex justify-center gap-8 text-white/80 text-sm">
             <div className="text-center">
@@ -132,7 +154,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Features Section */}
       <section className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
@@ -145,7 +167,7 @@ const Index = () => {
               Simple setup, powerful collaboration.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card key={index} className="p-8 gradient-card shadow-medium hover:shadow-large transition-smooth border-0">
@@ -161,7 +183,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Footer */}
       <footer className="border-t bg-muted/50 py-12">
         <div className="max-w-6xl mx-auto px-6">
@@ -170,7 +192,7 @@ const Index = () => {
               <Code2 className="w-6 h-6 text-primary" />
               <span className="font-semibold text-lg">CodeCollab</span>
             </div>
-            
+
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <span>© 2024 CodeCollab. Built with love.</span>
               <Button variant="ghost" size="sm" asChild>
