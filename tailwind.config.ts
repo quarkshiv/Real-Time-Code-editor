@@ -61,7 +61,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				editor: {
+					background: 'hsl(var(--editor-background))',
+					foreground: 'hsl(var(--editor-foreground))'
+				},
+				navbar: {
+					background: 'hsl(var(--navbar-background))'
 				}
+			},
+			fontFamily: {
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				mono: ['Fira Code', 'ui-monospace', 'monospace'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
