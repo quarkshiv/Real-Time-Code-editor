@@ -43,15 +43,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Gradient Background */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-glow">
+        {/* Dark Gradient Background */}
         <div className="absolute inset-0 gradient-hero" />
+        
+        {/* Additional overlay for extra depth */}
+        <div className="absolute inset-0 gradient-overlay" />
         
         {/* Particles */}
         <ParticleBackground />
         
-        {/* Hero Image */}
-        <div className="absolute inset-0 opacity-20">
+        {/* Hero Image with darker overlay */}
+        <div className="absolute inset-0 opacity-10">
           <img 
             src={heroImage} 
             alt="Code collaboration" 
@@ -62,7 +65,7 @@ const Index = () => {
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className="mb-8">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-white/90 text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-4 py-2 text-white/95 text-sm font-medium mb-6 border border-white/10 shadow-glow">
               <Code2 className="w-4 h-4" />
               Collaborative Code Editor
             </div>
@@ -70,12 +73,12 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Code Together,
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/80">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-blue-200">
                 Build Together
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-white/95 mb-12 max-w-2xl mx-auto leading-relaxed">
               Real-time collaborative code editor for teams. Share rooms, edit code together, 
               and bring your ideas to life with seamless synchronization.
             </p>
@@ -99,7 +102,7 @@ const Index = () => {
                 value={roomId}
                 onChange={(e) => setRoomId(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && joinRoom()}
-                className="bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/60 focus:border-white/40"
+                className="bg-white/5 backdrop-blur-md border-white/20 text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/10"
               />
               <Button 
                 variant="hero-outline" 
