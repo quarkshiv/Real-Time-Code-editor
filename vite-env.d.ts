@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_RAPIDAPI_KEY: string;
+  // add other env variables here
 }
 
 interface ImportMeta {
