@@ -1,73 +1,47 @@
-# Welcome to your Lovable project
+# 🖥️ Real-Time Code Editor
 
-## Project info
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()  
+[![Made with React](https://img.shields.io/badge/Made%20with-React-blue.svg)]()  
+[![Node.js](https://img.shields.io/badge/Node.js-%23339933.svg?style=flat&logo=node.js&logoColor=white)]()  
 
-**URL**: https://lovable.dev/projects/0cee2c5e-a635-4e1d-8535-7b30db1963b7
+---
 
-## How can I edit this code?
+## 🚀 Overview
+A **real-time collaborative code editor** that allows multiple users to write, edit, and execute code simultaneously. Ideal for pair programming, online coding interviews, and collaborative learning.  
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 🛠️ Features
+- Real-time collaboration with multiple users.
+- Syntax highlighting for multiple programming languages.
+- Run code directly in the editor.
+- Auto-save and session management.
+- Lightweight and responsive UI.
+- Shareable session links for instant collaboration.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0cee2c5e-a635-4e1d-8535-7b30db1963b7) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 💻 Tech Stack
+- **Frontend:** React, Tailwind CSS, CodeMirror / Monaco Editor
+- **Backend:** Node.js, Express.js
+- **Realtime:** Socket.IO / WebSockets
+- **Database:** MongoDB / Firebase (for session storage)
+- **Deployment:** Vercel / Heroku / Netlify
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🎨 Screenshots
+## 🎨 Screenshots
+![Editor Screenshot](./15720a20-3db0-4006-8c2c-7a3b77386d07.png)  
+*Clean and intuitive editor interface with real-time collaboration.*
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## ⚡ Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/0cee2c5e-a635-4e1d-8535-7b30db1963b7) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+**Clone the repo**
+```bash
+git clone https://github.com/your-username/realtime-code-editor.git
+cd realtime-code-editor
